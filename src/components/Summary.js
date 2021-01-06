@@ -37,24 +37,27 @@ const useStyles = makeStyles({
 });
 const Summary = ({ country }) => {
   const classes = useStyles();
-  const [summaries, setSummary] = useState([]);
+  const [summariesGlobal, setSummary] = useState([]);
+  const [summariesCountries,setSummaryCountries]=useState([]);
+
   useEffect(() => {
     const fetchSummaries = async () => {
       const data = await fetchSummary();
-      setSummary(data);
+      setSummary(data.Global);
+      setSummaryCountries(data.Countries);
     };
     fetchSummaries();
-  });
+  },[country]);
+
   {/*Global Data*/}
   const allGlobalDailyData = () => {
     return (
-     
       <ul>
-      <li>New Confirmed:{summaries.Global.NewConfirmed}</li>
-      <li>Total Confirmed:{summaries.Global.TotalConfirmed}</li>
-      <li>new Deaths:{summaries.Global.NewDeaths}</li>
-      <li>Total Confirmed:{summaries.Global.TotalDeahs}</li>
-      <li>Total Recovered:{summaries.Global.TotalRecovered}</li>
+      <li>New Confirmed:{summariesGlobal.NewConfirmed}</li>
+      <li>Total Confirmed:{summariesGlobal.TotalConfirmed}</li>
+      <li>new Deaths:{summariesGlobal.NewDeaths}</li>
+      <li>Total Confirmed:{summariesGlobal.TotalDeahs}</li>
+      <li>Total Recovered:{summariesGlobal.TotalRecovered}</li>
     </ul>
     )
   };
@@ -79,32 +82,7 @@ const Summary = ({ country }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {summaries.Countries.map((item) => (
-                  <StyledTableRow key={item.Country}>
-                    <StyledTableCell component="th" scope="row">
-                      {item.Country}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.NewConfirmed}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.TotalConfirmed}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.NewDeaths}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.TotalDeaths}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.NewRecovered}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.TotalRecovered}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))} */}
-                 {summaries.Countries.filter(item =>item.Slug===country).map(Filtered=> (
+                 {summariesCountries.filter(item =>item.Slug===country).map(Filtered=> (
                   <StyledTableRow key={Filtered.Country}>
                     <StyledTableCell component="th" scope="row">
                       {Filtered.Country}
@@ -154,7 +132,7 @@ const Summary = ({ country }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {summaries.Countries.map((item) => (
+                {summariesCountries.map((item) => (
                   <StyledTableRow key={item.Country}>
                     <StyledTableCell component="th" scope="row">
                       {item.Country}
@@ -192,17 +170,16 @@ const Summary = ({ country }) => {
           <Card variant="outlined">
             <CardContent>
             <h1>Global Data</h1>
-              {/* {allGlobalDailyData()} */}
+              {allGlobalDailyData()}
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12}>
-
-          {/* {dailySelectedCountryData()} */}
+          {dailySelectedCountryData()}
         </Grid>
         <Grid item xs={12}>
 
-          {/* {dailyAllWorldData()} */}
+          {dailyAllWorldData()}
         </Grid>
       </Grid>
     </React.Fragment>
