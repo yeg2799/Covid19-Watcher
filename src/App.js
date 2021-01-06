@@ -41,28 +41,27 @@ const App = () => {
             style={{ width: 100, height: 100, marginTop: 20 }}
           />
 
-          <FormControl className={classes.formControl} >
+          <FormControl className={classes.formControl}>
             <Select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              style={{color:"white"}}
-            
+              style={{ color: "white" }}
             >
               {countries.map((country) => [
                 <MenuItem value={country.Slug}>{country.Country}</MenuItem>,
               ])}
             </Select>
           </FormControl>
-          <Grid item xs={12}>
-            <Summary country={country}/>
-          </Grid>
+
           {/*Chart*/}
           <Grid item xs={12}>
             <Paper>
               <AreaChart country={country} />
             </Paper>
           </Grid>
-          
+          <Grid item xs={12}>
+            <Summary country={country} />
+          </Grid>
         </Grid>
       </Container>
     </React.Fragment>

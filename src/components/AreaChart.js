@@ -53,7 +53,7 @@ const AreaChart = ({ country }) => {
             data: dailyData.map((item) => item.Active),
           },
         ]}
-        style={{ marginTop: 250, }}
+        style={{marginTop:25 }}
         height={450}
       />
     </div>
