@@ -60,7 +60,7 @@ const Summary = ({ country }) => {
     )
   };
   {/*All Country*/}
-  const dailyWorlData=()=>{
+  const dailySelectedCountryData=()=>{
     return(
 <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
@@ -135,6 +135,57 @@ const Summary = ({ country }) => {
           </TableContainer>
     )
   }
+  const dailyAllWorldData=()=>{
+    return(
+<TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Country</StyledTableCell>
+                  <StyledTableCell align="right">NewConfirmed</StyledTableCell>
+                  <StyledTableCell align="right">
+                    TotalConfirmed
+                  </StyledTableCell>
+                  <StyledTableCell align="right">NewDeaths</StyledTableCell>
+                  <StyledTableCell align="right">TotalDeaths</StyledTableCell>
+                  <StyledTableCell align="right">NewRecovered</StyledTableCell>
+                  <StyledTableCell align="right">
+                    TotalRecovered
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {summaries.Countries.map((item) => (
+                  <StyledTableRow key={item.Country}>
+                    <StyledTableCell component="th" scope="row">
+                      {item.Country}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {item.NewConfirmed}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {item.TotalConfirmed}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {item.NewDeaths}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {item.TotalDeaths}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {item.NewRecovered}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {item.TotalRecovered}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+                
+              </TableBody>
+            </Table>
+          </TableContainer>
+    )
+  }
   return (
     <React.Fragment>
       <Grid Container>
@@ -147,7 +198,12 @@ const Summary = ({ country }) => {
           </Card>
         </Grid>
         <Grid item xs={12}>
-          {dailyWorlData()}
+
+          {dailySelectedCountryData()}
+        </Grid>
+        <Grid item xs={12}>
+
+          {dailyAllWorldData()}
         </Grid>
       </Grid>
     </React.Fragment>
