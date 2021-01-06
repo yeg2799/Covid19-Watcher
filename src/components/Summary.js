@@ -45,10 +45,11 @@ const Summary = ({ country }) => {
       setSummary(data);
     };
     fetchSummaries();
-  }, [country]);
+  },[]);
   {/*Global Data*/}
   const allGlobalDailyData = () => {
     return (
+     
       <ul>
       <li>New Confirmed:{summaries.Global.NewConfirmed}</li>
       <li>Total Confirmed:{summaries.Global.TotalConfirmed}</li>
@@ -79,7 +80,7 @@ const Summary = ({ country }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {summaries.Countries.map((item) => (
+                {/* {summaries.Countries.map((item) => (
                   <StyledTableRow key={item.Country}>
                     <StyledTableCell component="th" scope="row">
                       {item.Country}
@@ -103,6 +104,31 @@ const Summary = ({ country }) => {
                       {item.TotalRecovered}
                     </StyledTableCell>
                   </StyledTableRow>
+                ))} */}
+                 {summaries.Countries.filter(item =>item.Slug===country).map(Filtered=> (
+                  <StyledTableRow key={Filtered.Country}>
+                    <StyledTableCell component="th" scope="row">
+                      {Filtered.Country}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Filtered.NewConfirmed}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Filtered.TotalConfirmed}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Filtered.NewDeaths}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Filtered.TotalDeaths}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Filtered.NewRecovered}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {Filtered.TotalRecovered}
+                    </StyledTableCell>
+                  </StyledTableRow>
                 ))}
               </TableBody>
             </Table>
@@ -115,10 +141,8 @@ const Summary = ({ country }) => {
         <Grid item xs={12}>
           <Card variant="outlined">
             <CardContent>
-              <h1>Global Data</h1>
-              {
-                allGlobalDailyData()
-              }
+            <h1>Global Data</h1>
+              {allGlobalDailyData()}
             </CardContent>
           </Card>
         </Grid>
