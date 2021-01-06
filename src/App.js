@@ -29,7 +29,7 @@ const App = () => {
       setCountries(data);
     };
     fetchCountriesData();
-  }, []);
+  }, [country]);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -54,7 +54,7 @@ const App = () => {
             </Select>
           </FormControl>
           <Grid item xs={12}>
-            <Summary/>
+            <Summary country={country}/>
           </Grid>
           {/*Chart*/}
           <Grid item xs={12}>
