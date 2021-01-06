@@ -198,11 +198,11 @@ const Summary = ({ country }) => {
         </Grid>
         <Grid item xs={12}>
 
-          {dailySelectedCountryData()}
+          {/* {dailySelectedCountryData()} */}
         </Grid>
         <Grid item xs={12}>
 
-          {dailyAllWorldData()}
+          {/* {dailyAllWorldData()} */}
         </Grid>
       </Grid>
     </React.Fragment>
