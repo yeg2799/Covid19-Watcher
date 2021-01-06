@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import { fetchCountries } from "./Api";
 import AreaChart from "./components/AreaChart";
 import Paper from "@material-ui/core/Paper";
+import Summary from "./components/Summary";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,8 +25,8 @@ const App = () => {
   const [country, setCountry] = useState("turkey");
   useEffect(() => {
     const fetchCountriesData = async () => {
-      const countries = await fetchCountries();
-      setCountries(countries);
+      const data = await fetchCountries();
+      setCountries(data);
     };
     fetchCountriesData();
   }, []);
@@ -48,16 +49,20 @@ const App = () => {
             
             >
               {countries.map((country) => [
-                <MenuItem value={country.Slug} >{country.Country}</MenuItem>,
+                <MenuItem value={country.Slug}>{country.Country}</MenuItem>,
               ])}
             </Select>
           </FormControl>
+          <Grid item xs={12}>
+            <Summary/>
+          </Grid>
           {/*Chart*/}
           <Grid item xs={12}>
             <Paper>
               <AreaChart country={country} />
             </Paper>
           </Grid>
+          
         </Grid>
       </Container>
     </React.Fragment>
