@@ -38,14 +38,13 @@ const useStyles = makeStyles({
 const Summary = ({ country }) => {
   const classes = useStyles();
   const [summaries, setSummary] = useState([]);
-
   useEffect(() => {
     const fetchSummaries = async () => {
       const data = await fetchSummary();
       setSummary(data);
     };
     fetchSummaries();
-  },[]);
+  });
   {/*Global Data*/}
   const allGlobalDailyData = () => {
     return (
@@ -193,7 +192,7 @@ const Summary = ({ country }) => {
           <Card variant="outlined">
             <CardContent>
             <h1>Global Data</h1>
-              {allGlobalDailyData()}
+              {/* {allGlobalDailyData()} */}
             </CardContent>
           </Card>
         </Grid>
