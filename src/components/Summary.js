@@ -46,10 +46,11 @@ const Summary = ({ country }) => {
     const fetchSummaries = async () => {
       const data = await fetchSummary();
       setSummary(data.Global);
-      setSummaryCountries(data.Countries);
+      {search===""? setSummaryCountries(data.Countries):updateInput(search)}
+      
     };
     fetchSummaries();
-  });
+  },[]);
 
   const updateInput = async (search) => {
     const filtered = summariesCountries.filter(country => {
