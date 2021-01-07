@@ -33,12 +33,14 @@ const StyledTableRow = withStyles((theme) => ({
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
+    marginTop:120
   },
 });
 const Summary = ({ country }) => {
   const classes = useStyles();
   const [summariesGlobal, setSummary] = useState([]);
   const [summariesCountries,setSummaryCountries]=useState([]);
+  const [search,setSearchCountry]=useState("");
 
   useEffect(() => {
     const fetchSummaries = async () => {
@@ -47,8 +49,15 @@ const Summary = ({ country }) => {
       setSummaryCountries(data.Countries);
     };
     fetchSummaries();
-  },[country]);
+  });
 
+  const updateInput = async (search) => {
+    const filtered = summariesCountries.filter(country => {
+     return country.Country.toLowerCase().includes(search.toLowerCase())
+    })
+    setSearchCountry(search);
+    setSummaryCountries(filtered);
+ }
   {/*Global Data*/}
   const allGlobalDailyData = () => {
     return (
@@ -64,8 +73,9 @@ const Summary = ({ country }) => {
   {/*All Country*/}
   const dailySelectedCountryData=()=>{
     return(
-<TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+<TableContainer component={Paper} className={classes.table}>
+        <h1>Selected Country:{country}</h1>
+            <Table  aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Country</StyledTableCell>
@@ -114,8 +124,11 @@ const Summary = ({ country }) => {
   }
   const dailyAllWorldData=()=>{
     return(
-<TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
+      
+<TableContainer component={Paper} className={classes.table}>
+      <h1>All Countries:{search}</h1>
+      <input placeholder="search"  onChange={(e)=>updateInput(e.target.value)}></input>
+            <Table aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Country</StyledTableCell>
@@ -175,6 +188,7 @@ const Summary = ({ country }) => {
           </Card>
         </Grid>
         <Grid item xs={12}>
+          
           {dailySelectedCountryData()}
         </Grid>
         <Grid item xs={12}>
