@@ -40,13 +40,15 @@ const Summary = ({ country }) => {
   const classes = useStyles();
   const [summariesGlobal, setSummary] = useState([]);
   const [summariesCountries,setSummaryCountries]=useState([]);
+  const [summariesCountriesDefault,setSummaryCountriesDefault]=useState([]);
   const [search,setSearchCountry]=useState("");
 
   useEffect(() => {
     const fetchSummaries = async () => {
       const data = await fetchSummary();
       setSummary(data.Global);
-      {search===""? setSummaryCountries(data.Countries):updateInput(search)}
+      setSummaryCountries(data.Countries);
+      setSummaryCountriesDefault(data.Countries);
       
     };
     fetchSummaries();
@@ -57,7 +59,7 @@ const Summary = ({ country }) => {
      return country.Country.toLowerCase().includes(search.toLowerCase())
     })
     setSearchCountry(search);
-    setSummaryCountries(filtered);
+    setSummaryCountriesDefault(filtered);
  }
   {/*Global Data*/}
   const allGlobalDailyData = () => {
@@ -146,7 +148,8 @@ const Summary = ({ country }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {summariesCountries.map((item) => (
+
+                {summariesCountriesDefault.map((item) => (
                   <StyledTableRow key={item.Country}>
                     <StyledTableCell component="th" scope="row">
                       {item.Country}
