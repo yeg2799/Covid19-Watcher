@@ -129,9 +129,16 @@ const Summary = ({ country }) => {
     return(
       
 <TableContainer component={Paper} className={classes.table}>
-      <h1>All Countries:{search}</h1>
-      <input placeholder="search"  onChange={(e)=>updateInput(e.target.value)}></input>
-            <Table aria-label="customized table">
+  <Grid container>
+  <Grid item xs={10}>
+  <h1>All Countries:{search}</h1>
+  </Grid>
+  <Grid item xs={1}>
+  <input placeholder="search country"  onChange={(e)=>updateInput(e.target.value)} style={{padding:5,marginTop:6,borderRadius:16,outline:"none"}}></input>
+  </Grid>
+  </Grid>
+  <Grid item xs={12}>
+  <Table aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Country</StyledTableCell>
@@ -177,6 +184,8 @@ const Summary = ({ country }) => {
                 
               </TableBody>
             </Table>
+  </Grid>
+           
           </TableContainer>
     )
   }
